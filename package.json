@@ -9,7 +9,7 @@
     "clean": "rm -rf application && mkdir application",
     "build-babel": "babel ./src --out-dir ./application",
     "build": "npm run clean && npm run build-babel",
-    "start": "cross-env NODE_ENV=production npm run build && node ./application/index.js",
+    "start": "cross-env NODE_ENV=production node ./application/index.js",
     "start:staging": "npm run build && cross-env NODE_ENV=staging  node ./application/index.js"
   },
   "devDependencies": {
