@@ -1,0 +1,65 @@
+{
+  "name": "flutterwave-validation-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "babel-node ./src/index.js",
+    "clean": "rm -rf application && mkdir application",
+    "build-babel": "babel ./src --out-dir ./application",
+    "build": "npm run clean && npm run build-babel",
+    "start": "cross-env NODE_ENV=production npm run build && node ./application/index.js",
+    "start:staging": "npm run build && cross-env NODE_ENV=staging  node ./application/index.js"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/register": "^7.0.0",
+    "eslint": "^5.11.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "jest": "^26.4.2",
+    "nodemon": "2.0.4"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.2.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.16.4",
+    "express-async-errors": "^3.1.1",
+    "joi": "^17.2.1",
+    "lodash": "^4.17.20",
+    "moment": "^2.26.0",
+    "morgan": "^1.10.0",
+    "payload-validator": "^1.0.4",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.1.3",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.0"
+  },
+  "engines": {
+    "node": "^12.0.0"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.js",
+      "**/*.spec.js",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "src"
+    ],
+    "exec": "npm run dev",
+    "ext": "js",
+    "env": {
+      "NODE_ENV": "development"
+    }
+  },
+  "author": "",
+  "license": "ISC"
+}
