@@ -61,9 +61,6 @@ export class ValidateController {
       }
     }
     if (typeof data === 'string') {
-      // if (data !== field){
-      //   return ResponseHandler.response("error", 400, `field ${field} is missing from data.`, res, null);
-      // } else {
         const comparisonFunction = comparisonMap[condition];
         const bool = comparisonFunction(data[field], condition_value);
         if (bool) {
@@ -73,8 +70,6 @@ export class ValidateController {
           const valid = validationResponseSchema(!bool, field, data[field], condition, condition_value);
           return ResponseHandler.response("error", 400, `field ${field} failed validation.`, res, valid);
         }
-        
-      // }
     }
     if (typeof data === 'object') {
       const flattenedObject = flattenObject(data);
