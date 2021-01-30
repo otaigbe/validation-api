@@ -5,7 +5,7 @@ import { ValidationSchema } from "../middleware/ValidationSchema";
 import { Validate } from "../middleware/Validate";
 const router = express.Router();
 
-router.post("/validate-rule", Validate.validateSchema(ValidationSchema.validationRuleSchema), Validate.checkFieldPattern, ValidateController.validate);
+router.post("/validate-rule", Validate.checkBody, Validate.validateSchema(ValidationSchema.validationRuleSchema), Validate.checkFieldPattern, ValidateController.validate);
 router.get("/", (req, res)=> {
 	return res.status(200).json({
 		"message": "My Rule-Validation API",

@@ -1,17 +1,26 @@
 import { ResponseHandler } from "../handlers/ResponseHandler";
+import _ from "lodash";
 
 export class Validate {
 
+
+	static checkBody(req, res, next) {
+		console.log(req.body);
+		if (_.isEmpty(req.body) === true) {
+			return ResponseHandler.response("error", 400, "Invalid JSON payload passed.", res, null);
+		} else {
+			next();
+		}
+	}
+
 	static checkFieldPattern(req, res, next){
-				const patt = /^[A-Za-z_0-9][A-Za-z_0-9]*(\.\b[A-Za-z_0-9][A-Za-z_0-9]*)?$/;
-				const bool = patt.test(req.body.rule.field);
-				if(bool) {
-					next();
-				} else {
-					// res.json({"message" : result.response.errorMessage});
-					return ResponseHandler.response("error", 400, "field should have depth of one.", res, null);
-				}
-			
+		const patt = /^[A-Za-z_0-9][A-Za-z_0-9]*(\.\b[A-Za-z_0-9][A-Za-z_0-9]*)?$/;
+		const bool = patt.test(req.body.rule.field);
+		if(bool) {
+			next();
+		} else {
+			return ResponseHandler.response("error", 400, "field should have depth of one.", res, null);
+		}	
 	}
 
 	static validateSchema(schema) {
@@ -23,7 +32,7 @@ export class Validate {
 			} else {
 				// throw new BadInputError("Bad Input");
 				// console.log(result.error);
-				return ResponseHandler.response("failed", 400, result.error.message, res, null);
+				return ResponseHandler.response("error", 400, result.error.message, res, null);
 			}
 		};
 	}
@@ -35,7 +44,7 @@ export class Validate {
 			if (result.error == null) {
 				next();
 			} else {
-				return ResponseHandler.response("failed", 400, result.error.message, res);
+				return ResponseHandler.response("error", 400, result.error.message, res);
 			}
 		};
 	}
@@ -46,7 +55,7 @@ export class Validate {
 			if (result.error == null) {
 				next();
 			} else {
-				return ResponseHandler.response("failed", 400, result.error.message, res);
+				return ResponseHandler.response("error", 400, result.error.message, res);
 			}
 		};
 	}
