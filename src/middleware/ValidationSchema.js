@@ -28,6 +28,10 @@ export class ValidationSchema {
             'object.empty': `Invalid JSON payload.`,
             'any.required': `field is required.`
         }),
-        data: Joi.alternatives(Joi.object().max(100).required(), Joi.string().min(1).max(255).required(), Joi.array().min(1).max(100).required()).error(new Error("data should be either an object, a string or an array.")).required(),
+        data: Joi.alternatives(Joi.object().max(100).required(), Joi.string().min(1).max(255).required(), Joi.array().min(1).max(100).required())
+        .required().messages({
+            'alternatives.types': 'data should be a string, an array or an object.',
+            'any.required': `data is required.`
+        }),
     })
 }
